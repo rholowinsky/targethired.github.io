@@ -1,165 +1,111 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>targethired.com</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>targethired.com</title>
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='50%' x='50%' font-size='24' dominant-baseline='middle' text-anchor='middle'>🎯</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='50%' x='50%' font-size='24' dominant-baseline='middle' text-anchor='middle'>🎯</text></svg>">
 
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-
-  <style>
-    /* ---------- GRADIENT BACKGROUND ---------- */
-    body {
-      --bg: #0f1724;
-      --panel: #0b1220;
-      --text: #d6deeb;
-      --punct: #93a1c6;
-      --key: #9cdcfe;
-      --colon: #c792ea;
-      --string: #7ee787;
-      --shadow: rgba(2,6,23,0.6);
-
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: linear-gradient(135deg, #0f1724 0%, #1e293b 100%);
-      color: var(--text);
-      font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
-      transition: background 0.3s ease, color 0.3s ease;
-      overflow-x: hidden;
-      padding-bottom: 40px; /* leave room for floating button */
-    }
-
-    body.light-mode {
-      --bg: #f6f8fa;
-      --panel: #ffffff;
-      --text: #1f2937;
-      --punct: #6b7280;
-      --key: #0b5fff;
-      --colon: #8b5cf6;
-      --string: #b45309;
-      --shadow: rgba(2,6,23,0.08);
-      background: linear-gradient(135deg, #f6f8fa 0%, #e5e7eb 100%);
-      color: var(--text);
-    }
-
-    .code-card {
-      background: var(--panel);
-      border-radius: 12px;
-      padding: 18px 20px;
-      box-shadow: 0 10px 30px var(--shadow);
-      max-width: 720px;
-      width: 90%;
-      margin-top: 20px; /* top buffer */
-      box-sizing: border-box;
-      overflow-x: auto;
-    }
-
-    pre {
-      margin: 0;
-      padding: 10px 0;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--text);
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow: visible; /* allow full height without scrolling */
-    }
-
-    .punctuation { color: var(--punct); }
-    .key         { color: var(--key); font-weight: 600; }
-    .colon       { color: var(--colon); }
-    .string      { color: var(--string); }
-
-    .label {
-      font-size: 13px;
-      color: var(--punct);
-      margin-bottom: 8px;
-      display: block;
-      font-weight: 600;
-      text-transform: lowercase;
-    }
-
-    .hint {
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--punct);
-      text-transform: lowercase;
-      word-break: break-word;
-    }
-
-    .theme-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: none;
-      border: 1px solid var(--punct);
-      color: var(--text);
-      border-radius: 8px;
-      padding: 6px 14px;
-      font-family: inherit;
-      cursor: pointer;
-      text-transform: lowercase;
-      transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
-      z-index: 1000;
-    }
-
-    .theme-toggle:hover {
-      background: var(--punct);
-      color: var(--bg);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    @media (max-width: 600px) {
-  .code-card {
-    padding: 14px 16px;
-    max-width: calc(100% - 40px); /* 20px buffer each side */
-    width: 100%;
-    max-height: calc(100vh - 60px); /* never taller than viewport minus top margin */
-    overflow-y: auto; /* scroll internally if code too tall */
-  }
-  pre {
-    font-size: 15px;
-    max-height: none; /* let it fill card */
-  }
+<style>
+body {
+  --bg:#0f1724; --panel:#0b1220; --text:#d6deeb;
+  --punct:#93a1c6; --key:#9cdcfe; --colon:#c792ea; --string:#7ee787;
+  --shadow:rgba(2,6,23,0.6);
+  margin:0; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+  background: linear-gradient(135deg,#0f1724 0%,#1e293b 100%);
+  color:var(--text); font-family:"Fira Code", monospace;
+  transition: background 0.3s ease,color 0.3s ease; padding-bottom:60px; overflow-x:hidden;
 }
-  </style>
+body.light-mode {
+  --bg:#f6f8fa; --panel:#ffffff; --text:#1f2937; --punct:#6b7280;
+  --key:#0b5fff; --colon:#8b5cf6; --string:#b45309; --shadow: rgba(2,6,23,0.08);
+  background: linear-gradient(135deg,#f6f8fa 0%,#e5e7eb 100%);
+  color: var(--text);
+}
+
+.code-card {
+  background: var(--panel); border-radius:12px; padding:18px 20px; 
+  box-shadow:0 10px 30px var(--shadow); max-width:720px; width:90%; 
+  box-sizing:border-box; overflow-x:auto; opacity:0; transform:translateY(-20px); animation: fadeSlideIn 0.6s forwards;
+}
+@keyframes fadeSlideIn { to { opacity:1; transform:translateY(0); } }
+
+pre { margin:0; padding:10px 0; font-size:16px; line-height:1.6; color:var(--text); white-space:pre-wrap; word-break:break-word; overflow:visible; }
+.punctuation{color:var(--punct);}
+.key{color:var(--key); font-weight:600;}
+.colon{color:var(--colon);}
+.string{color:var(--string);}
+.label{font-size:13px;color:var(--punct);margin-bottom:8px;display:block;font-weight:600;text-transform:lowercase;}
+.hint{margin-top:10px;font-size:12px;color:var(--punct);text-transform:lowercase;word-break:break-word;}
+
+.theme-toggle{
+  position:fixed; bottom:20px; right:20px; background:none; border:1px solid var(--punct); color:var(--text);
+  border-radius:8px; padding:6px 14px; font-family:inherit; cursor:pointer; text-transform:lowercase; z-index:1000;
+  opacity:0; transform:translateY(10px); animation: fadeSlideUp 0.8s forwards;
+  transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.theme-toggle:hover{background:var(--punct); color:var(--bg); transform:translateY(-2px) scale(1.05); box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+@keyframes fadeSlideUp { to { opacity:1; transform:translateY(0); } }
+
+@media(max-width:600px){.code-card{padding:14px 16px; max-width:calc(100%-40px); max-height:calc(100vh-60px); overflow-y:auto;} pre{font-size:15px;}}
+
+#cursor { display:inline-block; width:1ch; color:var(--text); }
+</style>
 </head>
 <body>
-  <div class="code-card">
-    <span class="label">javascript (object literal)</span>
-    <pre><code><span class="punctuation">{</span> <span class="key">target</span><span class="colon">:</span> <span class="string">'hired'</span> <span class="punctuation">}</span></code></pre>
-    <div class="hint">valid js object literal. keys don’t require quotes when they’re valid identifiers.</div>
-  </div>
+<div class="code-card">
+  <span class="label">javascript (object literal)</span>
+  <pre><code id="typedCode"><span id="content"></span><span id="cursor">|</span></code></pre>
+  <div class="hint">valid js object literal. keys don’t require quotes when they’re valid identifiers.</div>
+</div>
 
-  <button class="theme-toggle" id="themeToggle">🌞 switch to light</button>
+<button class="theme-toggle" id="themeToggle">🌞 switch to light</button>
 
-  <script>
-    const btn = document.getElementById('themeToggle');
-    const body = document.body;
+<script>
+const btn = document.getElementById('themeToggle');
+const body = document.body;
+const hour = new Date().getHours();
+const isNight = hour >=18 || hour <6;
+if(!isNight){body.classList.add('light-mode'); btn.textContent='🌙 switch to dark';}
+else {body.classList.remove('light-mode'); btn.textContent='🌞 switch to light';}
+btn.addEventListener('click',()=>{const isLight=body.classList.toggle('light-mode'); btn.textContent=isLight?'🌙 switch to dark':'🌞 switch to light';});
 
-    const hour = new Date().getHours();
-    const isNight = hour >= 18 || hour < 6;
+const codeString = "{ target: 'hired' }";
+let i=0;
 
-    if (!isNight) {
-      body.classList.add('light-mode');
-      btn.textContent = '🌙 switch to dark';
-    } else {
-      body.classList.remove('light-mode');
-      btn.textContent = '🌞 switch to light';
-    }
+const content = document.getElementById('content');
+const cursor = document.getElementById('cursor');
 
-    btn.addEventListener('click', () => {
-      const isLight = body.classList.toggle('light-mode');
-      btn.textContent = isLight ? '🌙 switch to dark' : '🌞 switch to light';
-    });
-  </script>
+function colorize(str){
+  return str
+    .replace(/\{|\}/g,m=>`<span class="punctuation">${m}</span>`)
+    .replace(/\btarget\b/g,`<span class="key">target</span>`)
+    .replace(/:/g,`<span class="colon">:</span>`)
+    .replace(/'hired'/g,`<span class="string">'hired'</span>`);
+}
+
+let blinkInterval = setInterval(()=>{ cursor.style.visibility = (cursor.style.visibility==='visible')?'hidden':'visible'; },600);
+
+function typeChar(){
+  if(i<codeString.length){
+    content.textContent += codeString[i];
+    content.innerHTML = colorize(content.textContent);
+    i++;
+    setTimeout(typeChar,50 + Math.random()*100);
+  } else {
+    clearInterval(blinkInterval);
+    cursor.style.display='none';
+  }
+}
+
+typeChar();
+</script>
 </body>
 </html>
+
+
 
 
