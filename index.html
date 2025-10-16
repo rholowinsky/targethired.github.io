@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ---------- BASE THEME VARIABLES ---------- */
+    /* ---------- GRADIENT BACKGROUND ---------- */
     body {
       --bg: #0f1724;
       --panel: #0b1220;
@@ -24,14 +24,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: var(--bg);
+      background: linear-gradient(135deg, #0f1724 0%, #1e293b 100%);
       color: var(--text);
       font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
       transition: background 0.3s ease, color 0.3s ease;
       overflow-x: hidden;
+      padding-bottom: 40px; /* leave room for floating button */
     }
 
-    /* ---------- LIGHT MODE CLASS ---------- */
     body.light-mode {
       --bg: #f6f8fa;
       --panel: #ffffff;
@@ -41,7 +41,7 @@
       --colon: #8b5cf6;
       --string: #b45309;
       --shadow: rgba(2,6,23,0.08);
-      background: var(--bg);
+      background: linear-gradient(135deg, #f6f8fa 0%, #e5e7eb 100%);
       color: var(--text);
     }
 
@@ -50,9 +50,9 @@
       border-radius: 12px;
       padding: 18px 20px;
       box-shadow: 0 10px 30px var(--shadow);
-      max-width: 720px; /* desktop wider */
+      max-width: 720px;
       width: 90%;
-      margin-top: 20px; /* 20px from top of page */
+      margin-top: 20px; /* top buffer */
       box-sizing: border-box;
       overflow-x: auto;
     }
@@ -63,10 +63,9 @@
       font-size: 16px;
       line-height: 1.6;
       color: var(--text);
-      white-space: pre-wrap; /* wrap long lines */
+      white-space: pre-wrap;
       word-break: break-word;
-      max-height: 300px; /* restrict height on mobile */
-      overflow-y: auto;   /* scroll if code too tall */
+      overflow: visible; /* allow full height without scrolling */
     }
 
     .punctuation { color: var(--punct); }
@@ -91,7 +90,6 @@
       word-break: break-word;
     }
 
-    /* ---------- FLOATING TOGGLE BUTTON ---------- */
     .theme-toggle {
       position: fixed;
       bottom: 20px;
@@ -114,15 +112,13 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-    /* ---------- RESPONSIVE TWEAKS ---------- */
     @media (max-width: 600px) {
       .code-card {
         padding: 14px 16px;
-        max-width: calc(100% - 40px); /* 20px buffer both sides */
+        max-width: calc(100% - 40px); /* 20px buffer */
       }
       pre {
         font-size: 15px;
-        max-height: 200px; /* smaller on mobile */
       }
     }
   </style>
@@ -140,7 +136,6 @@
     const btn = document.getElementById('themeToggle');
     const body = document.body;
 
-    // Dark mode if local time is night
     const hour = new Date().getHours();
     const isNight = hour >= 18 || hour < 6;
 
@@ -152,7 +147,6 @@
       btn.textContent = '🌞 switch to light';
     }
 
-    // Manual toggle
     btn.addEventListener('click', () => {
       const isLight = body.classList.toggle('light-mode');
       btn.textContent = isLight ? '🌙 switch to dark' : '🌞 switch to light';
@@ -160,4 +154,5 @@
   </script>
 </body>
 </html>
+
 
