@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>js object display</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- DARK MODE (default) ---------- */
+    body {
+      --bg: #0f1724;
+      --panel: #0b1220;
+      --text: #d6deeb;
+      --punct: #93a1c6;
+      --key: #9cdcfe;
+      --colon: #c792ea;
+      --string: #7ee787;
+      --shadow: rgba(2,6,23,0.6);
+
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* ---------- LIGHT MODE CLASS ---------- */
+    body.light-mode {
+      --bg: #f6f8fa;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --punct: #6b7280;
+      --key: #0b5fff;
+      --colon: #8b5cf6;
+      --string: #b45309;
+      --shadow: rgba(2,6,23,0.08);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .code-card {
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 10px 30px var(--shadow);
+      max-width: 520px;
+      width: 100%;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    pre {
+      margin: 0;
+      padding: 12px 0;
+      overflow-x: auto;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .punctuation { color: var(--punct); }
+    .key         { color: var(--key); font-weight: 600; }
+    .colon       { color: var(--colon); }
+    .string      { color: var(--string); }
+
+    .label {
+      font-size: 13px;
+      color: var(--punct);
+      margin-bottom: 8px;
+      display: block;
+      font-weight: 600;
+      text-transform: lowercase;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--punct);
+      text-transform: lowercase;
+    }
+
+    /* ---------- Floating toggle button ---------- */
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: none;
+      border: 1px solid var(--punct);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-family: inherit;
+      cursor: pointer;
+      text-transform: lowercase;
+      transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      background: var(--punct);
+      color: var(--bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="code-card">
+    <span class="label">javascript (object literal)</span>
+    <pre><code><span class="punctuation">{</span> <span class="key">target</span><span class="colon">:</span> <span class="string">'hired'</span> <span class="punctuation">}</span></code></pre>
+    <div class="hint">valid js object literal. keys don’t require quotes when they’re valid identifiers.</div>
+  </div>
+
+  <button class="theme-toggle" id="themeToggle">🌞 switch to light</button>
+
+  <script>
+    const btn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Determine if it's nighttime locally (6 pm – 6 am)
+    const hour = new Date().getHours();
+    const isNight = hour >= 18 || hour < 6;
+
+    // Start in dark at night, light during day
+    if (!isNight) {
+      body.classList.add('light-mode');
+      btn.textContent = '🌙 switch to dark';
+    } else {
+      body.classList.remove('light-mode');
+      btn.textContent = '🌞 switch to light';
+    }
+
+    // Manual toggle
+    btn.addEventListener('click', () => {
+      const isLight = body.classList.toggle('light-mode');
+      btn.textContent = isLight ? '🌙 switch to dark' : '🌞 switch to light';
+    });
+  </script>
+</body>
+</html>
+
