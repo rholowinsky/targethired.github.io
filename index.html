@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>js object display</title>
+  <title>targethired.com</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='50%' x='50%' font-size='24' dominant-baseline='middle' text-anchor='middle'>🎯</text></svg>">
+
 
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 
@@ -113,14 +116,18 @@
     }
 
     @media (max-width: 600px) {
-      .code-card {
-        padding: 14px 16px;
-        max-width: calc(100% - 40px); /* 20px buffer */
-      }
-      pre {
-        font-size: 15px;
-      }
-    }
+  .code-card {
+    padding: 14px 16px;
+    max-width: calc(100% - 40px); /* 20px buffer each side */
+    width: 100%;
+    max-height: calc(100vh - 60px); /* never taller than viewport minus top margin */
+    overflow-y: auto; /* scroll internally if code too tall */
+  }
+  pre {
+    font-size: 15px;
+    max-height: none; /* let it fill card */
+  }
+}
   </style>
 </head>
 <body>
