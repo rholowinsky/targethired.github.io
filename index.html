@@ -22,9 +22,8 @@
       margin: 0;
       min-height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
+      align-items: center;
       background: var(--bg);
       color: var(--text);
       font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
@@ -51,9 +50,9 @@
       border-radius: 12px;
       padding: 18px 20px;
       box-shadow: 0 10px 30px var(--shadow);
-      max-width: 90%;
-      width: 480px;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      max-width: 720px; /* desktop wider */
+      width: 90%;
+      margin-top: 20px; /* 20px from top of page */
       box-sizing: border-box;
       overflow-x: auto;
     }
@@ -64,8 +63,10 @@
       font-size: 16px;
       line-height: 1.6;
       color: var(--text);
-      white-space: pre-wrap; /* allow wrapping on small screens */
+      white-space: pre-wrap; /* wrap long lines */
       word-break: break-word;
+      max-height: 300px; /* restrict height on mobile */
+      overflow-y: auto;   /* scroll if code too tall */
     }
 
     .punctuation { color: var(--punct); }
@@ -117,10 +118,11 @@
     @media (max-width: 600px) {
       .code-card {
         padding: 14px 16px;
-        max-width: 95%;
+        max-width: calc(100% - 40px); /* 20px buffer both sides */
       }
       pre {
         font-size: 15px;
+        max-height: 200px; /* smaller on mobile */
       }
     }
   </style>
@@ -158,5 +160,4 @@
   </script>
 </body>
 </html>
-
 
